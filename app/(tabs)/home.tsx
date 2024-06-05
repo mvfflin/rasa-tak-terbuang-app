@@ -6,6 +6,7 @@ import {
     Text,
     TextInput,
     SafeAreaView,
+    ScrollView,
 } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
@@ -15,17 +16,14 @@ import { ThemedView } from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { AnimatedView } from "react-native-reanimated/lib/typescript/reanimated2/component/View";
-import {
-    GestureHandlerRootView,
-    ScrollView,
-} from "react-native-gesture-handler";
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function HomeScreen() {
     let [searchQuery, setSearchQuery] = useState("");
     let [searchState, setSearchState] = useState(false);
 
     return (
-        <View className="bg-green-100 h-full">
+        <SafeAreaView className="bg-green-100 h-full">
             <View
                 style={{
                     borderWidth: searchState ? 1 : 0,
@@ -40,7 +38,7 @@ export default function HomeScreen() {
                         setSearchState(true);
                     }}
                     onBlur={() => setSearchState(false)}
-                    className="h-ful text-2xl flex pl-2"
+                    className="h-full text-2xl flex pl-2 w-full"
                     placeholder="Search..."
                     onChange={(e: any) => {
                         setSearchQuery(e.target.value);
@@ -55,13 +53,48 @@ export default function HomeScreen() {
                 >
                     Hi, User!
                 </Text>
-                <GestureHandlerRootView>
-                    <ScrollView horizontal className="bg-black h-10">
-                        <View className="bg-black"></View>
-                    </ScrollView>
-                </GestureHandlerRootView>
+                <Text className="text-xl text-green-700 mt-5">
+                    Find restaurants near you.
+                </Text>
+                {/* <GestureHandlerRootView> */}
+                <ScrollView
+                    horizontal
+                    className="flex-row flex gap-10"
+                    focusable
+                >
+                    <View className="bg-white flex w-[300px] h-[200px] rounded-md">
+                        <Image
+                            source={{
+                                uri: "https://images.unsplash.com/photo-1717451061024-5a74a0a112de?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            }}
+                            className="h-[120px] w-full rounded-t-md"
+                        />
+                        <View>
+                            <Text
+                                className="text-xl text-green-900 p-2"
+                                style={{ fontFamily: "SFUI_Bold" }}
+                            >
+                                Toko Ekambi
+                            </Text>
+                            <Text
+                                className="text-sm text-green-900 pl-2"
+                                style={{ fontFamily: "SFUI_Regular" }}
+                            >
+                                Ekambi Forward Strike Pack (03.00 - 05.00)
+                            </Text>
+                            <Ionicons name="heart-outline" />
+                        </View>
+                    </View>
+                    <View className="bg-white flex-1 justify-center items-center w-[100px] h-[100px] rounded-md m-2">
+                        <Text>Tap</Text>
+                    </View>
+                    <View className="bg-white flex-1 justify-center items-center w-[100px] h-[100px] rounded-md m-2 mr-20">
+                        <Text>Tap</Text>
+                    </View>
+                </ScrollView>
+                {/* </GestureHandlerRootView> */}
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 

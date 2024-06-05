@@ -22,6 +22,8 @@ export default function RootLayout() {
         Montserrat: require("../assets/fonts/Montserrat/Montserrat-Regular.ttf"),
         Montserrat_Black: require("../assets/fonts/Montserrat/Montserrat-Black.ttf"),
         Montserrat_Bold: require("../assets/fonts/Montserrat/Montserrat-Bold.ttf"),
+        SFUI_Regular: require("../assets/fonts/SFUI/SFUIText-Regular.ttf"),
+        SFUI_Bold: require("../assets/fonts/SFUI/SFUIText-Bold.ttf"),
     });
 
     useEffect(() => {
