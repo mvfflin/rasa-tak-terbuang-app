@@ -14,23 +14,54 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { AnimatedView } from "react-native-reanimated/lib/typescript/reanimated2/component/View";
+import {
+    GestureHandlerRootView,
+    ScrollView,
+} from "react-native-gesture-handler";
 
 export default function HomeScreen() {
     let [searchQuery, setSearchQuery] = useState("");
+    let [searchState, setSearchState] = useState(false);
 
     return (
-        <SafeAreaView className="bg-green-100 h-full">
-            <View className="container bg-white h-10 mt-20 mx-auto w-72 rounded shadow-xl px-5 justify-between">
+        <View className="bg-green-100 h-full">
+            <View
+                style={{
+                    borderWidth: searchState ? 1 : 0,
+                    borderColor: "green",
+                }}
+                className="container focus:bg-black flex-row items-center bg-white h-10 mt-20 mx-auto w-72 rounded shadow-xl px-5"
+            >
                 {/* <Ionicons name="search" className="inline-block" /> */}
+                <Ionicons name="search" className="flex" />
                 <TextInput
-                    className="h-full text-2xl inline-block focus:ring-2"
+                    onFocus={() => {
+                        setSearchState(true);
+                    }}
+                    onBlur={() => setSearchState(false)}
+                    className="h-ful text-2xl flex pl-2"
                     placeholder="Search..."
-                    onChange={(e) => {
+                    onChange={(e: any) => {
                         setSearchQuery(e.target.value);
                     }}
-                />
+                ></TextInput>
             </View>
-        </SafeAreaView>
+
+            <View className="mt-8 ml-5">
+                <Text
+                    className="text-3xl text-green-800"
+                    style={{ fontFamily: "Montserrat_Bold" }}
+                >
+                    Hi, User!
+                </Text>
+                <GestureHandlerRootView>
+                    <ScrollView horizontal className="bg-black h-10">
+                        <View className="bg-black"></View>
+                    </ScrollView>
+                </GestureHandlerRootView>
+            </View>
+        </View>
     );
 }
 
