@@ -9,6 +9,7 @@ import {
     ScrollView,
 } from "react-native";
 
+import placeholderImage from "../../assets/images/placeholder-shop.jpg";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -16,7 +17,30 @@ import { ThemedView } from "@/components/ThemedView";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { AnimatedView } from "react-native-reanimated/lib/typescript/reanimated2/component/View";
+import shop from "@/types/shop";
 // import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+const shops: Array<shop> = [
+    {
+        nama: "Toko Ekambi",
+        offer: "Kue Hitam Manis",
+        price: 10000,
+        image: "https://images.unsplash.com/photo-1717451061024-5a74a0a112de?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+        nama: "Toko D202",
+        offer: "Boyfriend Rent",
+        price: 1000000,
+        image: placeholderImage,
+    },
+];
+
+const rupiah = (number: number) => {
+    return new Intl.NumberFormat("id-ID", {
+        style: "currency",
+        currency: "IDR",
+    }).format(number);
+};
 
 export default function HomeScreen() {
     let [searchQuery, setSearchQuery] = useState("");
@@ -58,39 +82,37 @@ export default function HomeScreen() {
                 </Text>
                 {/* <GestureHandlerRootView> */}
                 <ScrollView
+                    decelerationRate={0}
                     horizontal
                     className="flex-row flex gap-10"
                     focusable
                 >
-                    <View className="bg-white flex w-[300px] h-[200px] rounded-md">
-                        <Image
-                            source={{
-                                uri: "https://images.unsplash.com/photo-1717451061024-5a74a0a112de?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                            }}
-                            className="h-[120px] w-full rounded-t-md"
-                        />
-                        <View>
-                            <Text
-                                className="text-xl text-green-900 p-2"
-                                style={{ fontFamily: "SFUI_Bold" }}
-                            >
-                                Toko Ekambi
-                            </Text>
-                            <Text
-                                className="text-sm text-green-900 pl-2"
-                                style={{ fontFamily: "SFUI_Regular" }}
-                            >
-                                Ekambi Forward Strike Pack (03.00 - 05.00)
-                            </Text>
-                            <Ionicons name="heart-outline" />
-                        </View>
-                    </View>
-                    <View className="bg-white flex-1 justify-center items-center w-[100px] h-[100px] rounded-md m-2">
-                        <Text>Tap</Text>
-                    </View>
-                    <View className="bg-white flex-1 justify-center items-center w-[100px] h-[100px] rounded-md m-2 mr-20">
-                        <Text>Tap</Text>
-                    </View>
+                    {shops.map((shop, index) => {
+                        return (
+                            <View className="bg-white flex w-[300px] h-[200px] rounded-md">
+                                <Image
+                                    src={placeholderImage}
+                                    className="h-[120px] w-full rounded-t-md object-cover"
+                                />
+                                <View className="pl-3 pt-1">
+                                    <Text
+                                        className="text-2xl text-green-900 p-2"
+                                        style={{ fontFamily: "SFUI_Bold" }}
+                                    >
+                                        {shop.nama}
+                                    </Text>
+                                    <Text
+                                        className="text-sm text-green-900 pl-2"
+                                        style={{ fontFamily: "SFUI_Regular" }}
+                                    >
+                                        {`${shop.offer} (${rupiah(
+                                            shop.price
+                                        )})`}
+                                    </Text>
+                                </View>
+                            </View>
+                        );
+                    })}
                 </ScrollView>
                 {/* </GestureHandlerRootView> */}
             </View>

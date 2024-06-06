@@ -1,5 +1,5 @@
-import { Tabs } from "expo-router";
-import React from "react";
+import { Redirect, Tabs, useNavigationContainerRef } from "expo-router";
+import React, { useEffect, useState } from "react";
 
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
@@ -15,6 +15,14 @@ const Stack = createMaterialBottomTabNavigator();
 
 export default function TabLayout() {
     const colorScheme = useColorScheme();
+    const [ready, setReady] = useState(false);
+    const nav = useNavigationContainerRef();
+
+    useEffect(() => {
+        if (!nav.isReady) return;
+
+        setReady(true);
+    }, [nav.isReady]);
 
     return (
         <Stack.Navigator
