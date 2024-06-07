@@ -48,7 +48,7 @@ export default function ShopDetails({ route, navigation }: any) {
                             }
                             className="h-[120px] w-full rounded-t-md object-cover"
                         />
-                        <View className="pl-3 pt-1">
+                        <View className="pl-1 pb-2">
                             <Text
                                 className="text-2xl text-green-900 p-2"
                                 style={{ fontFamily: "SFUI_Bold" }}

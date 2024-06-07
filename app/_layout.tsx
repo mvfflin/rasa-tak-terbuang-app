@@ -11,6 +11,8 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import Env from "@/constants/env";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -37,18 +39,33 @@ export default function RootLayout() {
     }
 
     return (
-        <ThemeProvider
-            value={colorScheme === "light" ? DarkTheme : DefaultTheme}
-        >
-            <Stack>
-                <Stack.Screen
-                    name="(tabs)"
-                    options={{
-                        headerShown: false,
-                        animation: "slide_from_right",
-                    }}
-                />
-            </Stack>
-        </ThemeProvider>
+        <ClerkProvider publishableKey={Env.CLERK_PUBLISHABLE_KEY!}>
+            <ThemeProvider
+                value={colorScheme === "light" ? DarkTheme : DefaultTheme}
+            >
+                <SignedIn>
+                    <Stack>
+                        <Stack.Screen
+                            name="(tabs)"
+                            options={{
+                                headerShown: false,
+                                animation: "slide_from_right",
+                            }}
+                        />
+                    </Stack>
+                </SignedIn>
+                <SignedOut>
+                    <Stack>
+                        <Stack.Screen
+                            name="(auth)"
+                            options={{
+                                headerShown: false,
+                                animation: "slide_from_left",
+                            }}
+                        />
+                    </Stack>
+                </SignedOut>
+            </ThemeProvider>
+        </ClerkProvider>
     );
 }
