@@ -1,5 +1,6 @@
 import shopsNear from "@/constants/shopNear";
 import shopNear from "@/types/shop";
+import { useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import {
@@ -28,6 +29,8 @@ const kmFormat = new Intl.NumberFormat("en-US", {
 });
 
 export default function MainScreen({ navigation }: any) {
+    const { isLoaded, user } = useUser();
+
     let [searchQuery, setSearchQuery] = useState("");
     let [searchState, setSearchState] = useState(false);
     return (
@@ -59,7 +62,7 @@ export default function MainScreen({ navigation }: any) {
                     className="text-3xl text-green-800"
                     style={{ fontFamily: "Montserrat_Bold" }}
                 >
-                    Hi, User!
+                    Hi, {user?.username}!
                 </Text>
                 <Text className="text-xl text-green-700 mt-5 mb-2">
                     Find restaurants near you.

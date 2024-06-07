@@ -13,9 +13,14 @@ import "react-native-reanimated";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import Env from "@/constants/env";
+import { createStackNavigator } from "@react-navigation/stack";
+import TabLayout from "./(auth)/_layout";
+import Navigation from "./navigation";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+
+const navStack = createStackNavigator();
 
 export default function RootLayout() {
     const colorScheme = useColorScheme();
@@ -43,28 +48,7 @@ export default function RootLayout() {
             <ThemeProvider
                 value={colorScheme === "light" ? DarkTheme : DefaultTheme}
             >
-                <SignedIn>
-                    <Stack>
-                        <Stack.Screen
-                            name="(tabs)"
-                            options={{
-                                headerShown: false,
-                                animation: "slide_from_right",
-                            }}
-                        />
-                    </Stack>
-                </SignedIn>
-                <SignedOut>
-                    <Stack>
-                        <Stack.Screen
-                            name="(auth)"
-                            options={{
-                                headerShown: false,
-                                animation: "slide_from_left",
-                            }}
-                        />
-                    </Stack>
-                </SignedOut>
+                <Navigation />
             </ThemeProvider>
         </ClerkProvider>
     );
