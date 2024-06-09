@@ -18,6 +18,7 @@ import TabLayout from "./(auth)/_layout";
 import Navigation from "./navigation";
 import { Provider } from "react-redux";
 import store from "@/functions/store";
+import { tokenCache } from "@/functions/cache";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -46,7 +47,10 @@ export default function RootLayout() {
     }
 
     return (
-        <ClerkProvider publishableKey={Env.CLERK_PUBLISHABLE_KEY!}>
+        <ClerkProvider
+            publishableKey={Env.CLERK_PUBLISHABLE_KEY!}
+            tokenCache={tokenCache}
+        >
             <Provider store={store}>
                 <ThemeProvider
                     value={colorScheme === "light" ? DarkTheme : DefaultTheme}

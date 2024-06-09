@@ -1,43 +1,46 @@
 {
-    "expo": {
-        "name": "Rasa Tak Terbuang",
-        "slug": "rasa-tak-terbuang-app",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/images/logo-big-nobg.png",
-        "scheme": "myapp",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./assets/images/logo-big-nobg.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/images/logo-big-nobg.png",
-                "backgroundColor": "#ffffff"
-            },
-            "package": "com.mvfflin.rasatakterbuang"
-        },
-        "web": {
-            "bundler": "metro",
-            "output": "static",
-            "favicon": "./assets/images/logo-big-nobg.png"
-        },
-        "plugins": ["expo-router"],
-        "experiments": {
-            "typedRoutes": true
-        },
-        "extra": {
-            "router": {
-                "origin": false
-            },
-            "eas": {
-                "projectId": "21a3359b-827d-4e3b-b2f5-d565f9abbd42"
-            }
-        }
+  "expo": {
+    "name": "Rasa Tak Terbuang",
+    "slug": "rasa-tak-terbuang-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/logo-big-nobg.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/logo-big-nobg.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mvfflin.rasatakterbuang"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/logo-big-nobg.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.mvfflin.rasatakterbuang"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/logo-big-nobg.png"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "21a3359b-827d-4e3b-b2f5-d565f9abbd42"
+      }
     }
+  }
 }
