@@ -77,7 +77,7 @@ export default function Login({ navigation }: any) {
                                 secureTextEntry={true}
                                 value={password}
                                 onChangeText={(value) => setPassword(value)}
-                                keyboardType="visible-password"
+                                // keyboardType="visible-password"
                                 // textContentType="password"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm px-2"
                             />
