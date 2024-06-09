@@ -12,7 +12,7 @@
         },
         "production": {
             "env": {
-                "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsubXZmZmluLm15LmlkJA"
+                "EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY": "pk_test_YWRqdXN0ZWQtbW9sbHktNjEuY2xlcmsuYWNjb3VudHMuZGV2JA"
             }
         }
     },
