@@ -8,10 +8,15 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./home";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
-import CatalogScreen from "./catalog";
 import AccountScreen from "./account";
+import CartScreen from "./cart";
+import {
+    ParamListBase,
+    RouteProp,
+    getFocusedRouteNameFromRoute,
+} from "@react-navigation/native";
 
-const Stack = createMaterialBottomTabNavigator();
+const Stack = createBottomTabNavigator();
 
 export default function TabLayout() {
     const colorScheme = useColorScheme();
@@ -27,17 +32,24 @@ export default function TabLayout() {
     return (
         <Stack.Navigator
             initialRouteName="Home"
-            activeColor={Colors[colorScheme ?? "dark"].tint}
-            barStyle={{ backgroundColor: "#ffffff" }}
-            shifting
-            activeIndicatorStyle={{ backgroundColor: "#FFFFFF" }}
-            labeled={false}
+            screenOptions={{
+                headerShown: false,
+                tabBarStyle: {
+                    height: 70,
+                },
+                tabBarActiveTintColor: Colors[colorScheme ?? "dark"].tint,
+                tabBarInactiveTintColor: "#000000",
+            }}
+            // activeColor={Colors[colorScheme ?? "dark"].tint}
+            // barStyle={{ backgroundColor: "#ffffff" }}
+            // shifting
+            // activeIndicatorStyle={{ backgroundColor: "#FFFFFF" }}
+            // labeled={false}
         >
             <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{
-                    tabBarColor: "#FFFFFF",
+                options={({ route }) => ({
                     title: "",
                     tabBarIcon: ({ focused, color }) => (
                         <TabBarIcon
@@ -45,13 +57,32 @@ export default function TabLayout() {
                             color={color}
                         />
                     ),
-                }}
+                    tabBarStyle: ((route: RouteProp<ParamListBase>) => {
+                        const routeName = getFocusedRouteNameFromRoute(route);
+
+                        console.log(routeName);
+                        if (routeName === "ShopDetails") {
+                            return { display: "none" };
+                        }
+                        return { height: 70 };
+                    })(route),
+                })}
+                // options={{
+                // tabBarColor: "#FFFFFF",
+                // title: "",
+                // tabBarIcon: ({ focused, color }) => (
+                //     <TabBarIcon
+                //         name={focused ? "grid" : "grid-outline"}
+                //         color={color}
+                //     />
+                // ),
+                // }}
             />
             <Stack.Screen
-                name="Catalog"
-                component={CatalogScreen}
-                options={{
-                    tabBarColor: "#ffffff",
+                name="Cart"
+                component={CartScreen}
+                options={({ route }) => ({
+                    // tabBarColor: "#ffffff",
                     title: "",
                     tabBarIcon: ({ focused, color }) => (
                         <TabBarIcon
@@ -59,13 +90,23 @@ export default function TabLayout() {
                             color={color}
                         />
                     ),
-                }}
+
+                    tabBarStyle: ((route: RouteProp<ParamListBase>) => {
+                        const routeName = getFocusedRouteNameFromRoute(route);
+
+                        console.log(routeName);
+                        if (routeName === "Checkout") {
+                            return { display: "none" };
+                        }
+                        return { height: 70 };
+                    })(route),
+                })}
             />
             <Stack.Screen
                 name="Account"
                 component={AccountScreen}
                 options={{
-                    tabBarColor: "",
+                    // tabBarColor: "",
                     title: "",
                     tabBarIcon: ({ focused, color }) => (
                         <TabBarIcon

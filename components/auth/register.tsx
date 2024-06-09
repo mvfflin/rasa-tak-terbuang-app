@@ -28,6 +28,7 @@ const validateEmail = (email: string) => {
 export default function Register({ navigation }: any) {
     const { isLoaded, signUp, setActive } = useSignUp();
 
+    const [loading, setLoading] = React.useState(false);
     const [username, setUsername] = React.useState("");
     const [emailAddress, setEmailAddress] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -44,6 +45,7 @@ export default function Register({ navigation }: any) {
 
         if (!validateEmail(emailAddress)) return setError("Email tidak valid!");
 
+        setLoading(true);
         try {
             await signUp.create({
                 username,
@@ -60,6 +62,7 @@ export default function Register({ navigation }: any) {
             console.log(errors.clerkError);
             setError(errors.errors[0].longMessage);
         }
+        setLoading(false);
     };
 
     const onPressVerify = async () => {
@@ -181,7 +184,8 @@ export default function Register({ navigation }: any) {
 
                                 <Pressable
                                     onPress={onSignUpPress}
-                                    className="active:outline-none text-white bg-green-700 active:bg-green-800 active:ring-4 active:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
+                                    disabled={loading}
+                                    className="active:outline-none disabled:bg-green-600 text-white bg-green-700 active:bg-green-800 active:ring-4 active:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
                                 >
                                     <Text
                                         className="text-white text-center"

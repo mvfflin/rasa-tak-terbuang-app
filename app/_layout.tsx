@@ -16,6 +16,8 @@ import Env from "@/constants/env";
 import { createStackNavigator } from "@react-navigation/stack";
 import TabLayout from "./(auth)/_layout";
 import Navigation from "./navigation";
+import { Provider } from "react-redux";
+import store from "@/functions/store";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -45,11 +47,13 @@ export default function RootLayout() {
 
     return (
         <ClerkProvider publishableKey={Env.CLERK_PUBLISHABLE_KEY!}>
-            <ThemeProvider
-                value={colorScheme === "light" ? DarkTheme : DefaultTheme}
-            >
-                <Navigation />
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider
+                    value={colorScheme === "light" ? DarkTheme : DefaultTheme}
+                >
+                    <Navigation />
+                </ThemeProvider>
+            </Provider>
         </ClerkProvider>
     );
 }

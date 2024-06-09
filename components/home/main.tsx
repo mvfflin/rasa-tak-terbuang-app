@@ -1,4 +1,5 @@
 import shopsNear from "@/constants/shopNear";
+import shopsTop from "@/constants/shopTop";
 import shopNear from "@/types/shop";
 import { useUser } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
@@ -129,16 +130,19 @@ export default function MainScreen({ navigation }: any) {
                     className="flex-row flex gap-10"
                     focusable
                 >
-                    {shopsNear.map((shop, index) => {
+                    {shopsTop.map((shop, index) => {
                         return (
-                            <View
-                                className="bg-white flex w-[300px] h-[200px] rounded-md"
+                            <Pressable
+                                className="bg-white flex w-[300px] h-[200px] rounded-md active:bg-neutral-200"
                                 key={index}
+                                onPress={() =>
+                                    navigation.navigate("ShopDetails", {
+                                        id: shop.id,
+                                    })
+                                }
                             >
                                 <Image
-                                    src={
-                                        "https://images.unsplash.com/photo-1717451061024-5a74a0a112de?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                                    }
+                                    src={shop.image}
                                     className="h-[120px] w-full rounded-t-md object-cover"
                                 />
                                 <View className="pl-3 pt-1">
@@ -159,7 +163,7 @@ export default function MainScreen({ navigation }: any) {
                                         )})`}
                                     </Text>
                                 </View>
-                            </View>
+                            </Pressable>
                         );
                     })}
                 </ScrollView>

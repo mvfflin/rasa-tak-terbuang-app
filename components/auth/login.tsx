@@ -18,11 +18,13 @@ export default function Login({ navigation }: any) {
     const [error, setError] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
 
     const onSignInPress = async () => {
         if (!isLoaded) return;
 
         try {
+            setLoading(true);
             const completeSignIn = await signIn.create({
                 identifier: email,
                 password,
@@ -35,6 +37,7 @@ export default function Login({ navigation }: any) {
             console.log(errors.clerkError);
             setError(errors.errors[0].longMessage);
         }
+        setLoading(false);
     };
 
     return (
@@ -71,18 +74,19 @@ export default function Login({ navigation }: any) {
                                 Password
                             </Text>
                             <TextInput
-                                secureTextEntry
+                                secureTextEntry={true}
                                 value={password}
                                 onChangeText={(value) => setPassword(value)}
                                 keyboardType="visible-password"
-                                textContentType="password"
+                                // textContentType="password"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm px-2"
                             />
                         </View>
 
                         <Pressable
                             onPress={onSignInPress}
-                            className="active:outline-none text-white bg-green-700 active:bg-green-800 active:ring-4 active:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
+                            disabled={loading}
+                            className="active:outline-none disabled:bg-green-600 text-white bg-green-700 active:bg-green-800 active:ring-4 active:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 "
                         >
                             <Text
                                 className="text-white text-center"

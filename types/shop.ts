@@ -3,7 +3,9 @@ export default interface shopNear {
     address: string;
     nama: string;
     offer: string;
+    description: string;
     price: number;
     distance: number;
     image?: any;
+    quantity?: number;
 }
