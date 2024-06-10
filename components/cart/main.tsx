@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     View,
@@ -21,14 +21,17 @@ export default function MainCartScreen({ navigation }: any) {
         setRandom(Math.floor(Math.random() * 999));
     }, [allItems]);
     const dispatch = useDispatch();
-    console.log(allItems);
+    // console.log(allItems);
     const [searchState, setSearchState] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    // const onTextLayout = useCallback((e: any) => {
+    //     console.log(e.nativeEvent.lines.length);
+    // }, []);
 
     const filteredItems = useMemo(
         () =>
             allItems.filter((item: shopNear) =>
-                item.nama.includes(searchQuery)
+                item.nama.toLowerCase().includes(searchQuery.toLowerCase())
             ),
         [searchQuery, random]
     );
@@ -78,7 +81,7 @@ export default function MainCartScreen({ navigation }: any) {
                     />
                 </View>
             </View>
-            <ScrollView className="h-full mt-3 mx-5 space-y-5">
+            <ScrollView className="h-full mt-5 mx-5 space-y-5">
                 {filteredItems.map((shop: shopNear, index: number) => {
                     return (
                         <View
@@ -87,26 +90,31 @@ export default function MainCartScreen({ navigation }: any) {
                         >
                             <Image
                                 src={shop.image}
-                                className="h-full w-20 rounded-md"
+                                className="w-20 rounded-md aspect-square"
                             />
-                            <View className="my-5">
+                            <View className="h-auto my-auto flex-1">
                                 <Text
                                     className="text-lg text-green-900"
                                     style={{
                                         fontFamily: "SFUI_Bold",
                                     }}
                                     adjustsFontSizeToFit={true}
-                                    numberOfLines={1}
+                                    numberOfLines={2}
+                                    // onTextLayout={onTextLayout}
                                 >
                                     {shop.nama}
                                 </Text>
                                 {/* <Text className="text-lg text-green-900">{`Quantity : ${shop.quantity}`}</Text> */}
-                                <Text className="text-lg text-green-900 font-medium">{`Total: ${rupiah(
+                                <Text
+                                    numberOfLines={1}
+                                    adjustsFontSizeToFit={true}
+                                    className="text-lg text-green-900 font-medium"
+                                >{`Total: ${rupiah(
                                     Math.floor(shop.quantity! * shop.price)
                                 )}`}</Text>
                             </View>
-                            <View className="items-end flex-1 space-y-2">
-                                <View className="flex-row  space-x-5 p-2 rounded-md bg-green-500">
+                            <View className=" space-y-2">
+                                <View className="flex-row space-x-5 p-2 rounded-md bg-green-500">
                                     <Pressable
                                         onPress={() => {
                                             decreaseQuantity(shop);
@@ -116,6 +124,8 @@ export default function MainCartScreen({ navigation }: any) {
                                         }}
                                     >
                                         <Text
+                                            numberOfLines={1}
+                                            adjustsFontSizeToFit={true}
                                             className="text-xl text-white"
                                             style={{
                                                 fontFamily: "SFUI_Bold",
@@ -126,6 +136,8 @@ export default function MainCartScreen({ navigation }: any) {
                                     </Pressable>
                                     <Pressable>
                                         <Text
+                                            numberOfLines={1}
+                                            adjustsFontSizeToFit={true}
                                             className="text-xl text-white"
                                             style={{
                                                 fontFamily: "SFUI_Bold",
@@ -143,6 +155,8 @@ export default function MainCartScreen({ navigation }: any) {
                                         }}
                                     >
                                         <Text
+                                            numberOfLines={1}
+                                            adjustsFontSizeToFit={true}
                                             className="text-xl text-white"
                                             style={{
                                                 fontFamily: "SFUI_Bold",
@@ -164,6 +178,8 @@ export default function MainCartScreen({ navigation }: any) {
                                     className="bg-green-500 active:bg-green-600 items-center p-2 rounded-md"
                                 >
                                     <Text
+                                        // numberOfLines={1}
+                                        // adjustsFontSizeToFit={true}
                                         className="text-lg text-white"
                                         style={{
                                             fontFamily: "SFUI_Bold",

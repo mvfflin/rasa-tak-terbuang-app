@@ -16,7 +16,7 @@ export default function ProfileScreen() {
                 <Avatar.Image
                     source={{ uri: user?.imageUrl }}
                     size={132}
-                    className="h-32 w-32"
+                    className="h-32 w-32 aspect-square mx-auto"
                 />
                 <Text
                     className="text-3xl text-center mt-5"
@@ -25,12 +25,12 @@ export default function ProfileScreen() {
                     {user?.username}
                 </Text>
             </View>
-            <View className="flex-col absolute space-y-5 bottom-0 w-full">
+            <View className="flex-col flex w-full mx-auto justify-center space-y-5 absolute bottom-5 px-5">
                 <Pressable
                     onPress={() => {
                         user?.delete();
                     }}
-                    className="px-5 py-3 w-full bg-red-600 active:bg-red-700"
+                    className="px-5 py-3 bg-red-600 active:bg-red-700 rounded-lg"
                 >
                     <Text className="text-xl text-white text-center">
                         Delete Account
@@ -38,7 +38,7 @@ export default function ProfileScreen() {
                 </Pressable>
                 <Pressable
                     onPress={() => signOut()}
-                    className="px-5 py-3 w-full bg-red-600 active:bg-red-700"
+                    className="px-5 py-3 bg-red-600 active:bg-red-700 rounded-lg"
                 >
                     <Text className="text-xl text-white text-center">
                         Log Out

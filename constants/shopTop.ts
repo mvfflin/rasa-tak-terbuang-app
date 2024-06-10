@@ -3,7 +3,7 @@ import shopNear from "@/types/shop";
 const shopsTop: Array<shopNear> = [
     {
         id: 12834,
-        nama: "Kue Mpok Dahlia",
+        nama: "Kue Basah Mpok Dahlia",
         offer: "Idul Fitri Pack",
         price: 20000,
         description:

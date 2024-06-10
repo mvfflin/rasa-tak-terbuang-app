@@ -47,6 +47,8 @@ export default function Login({ navigation }: any) {
                 <View className="w-72 bg-white rounded-lg shadow">
                     <View className="p-6 space-y-5">
                         <Text
+                            numberOfLines={1}
+                            adjustsFontSizeToFit={true}
                             className="text-3xl text-green-950 text-center"
                             style={{ fontFamily: "SFUI_Bold" }}
                         >
